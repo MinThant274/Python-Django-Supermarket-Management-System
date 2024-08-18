@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% load bootstrap4 %}
+{% load static %}
+
+{% block title %} Job Position {% endblock %}
+{% block body_block %}
+
+<div class="container">
+    <div>
+        <div
+    class="p-5 text-center bg-image"
+    style="
+      background-image: url('https://images.alphacoders.com/752/752588.png');
+      height: 250px;
+      margin-top: 2px;
+    "
+  >
+            <div class="mask" style="background-color: rgba(0, 0, 0, .5);">
+                <div class="d-flex justify-content-center align-items-center h-100">
+                    <div class="text-white">
+                        <h1 class="mb-3">Job List</h1>
+                        <p class="mb-3">You are here at Job Position list view</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div style="float: right;">
+        <form method="GET" class="form-inline">
+            <div class="input-group">
+                <input type="search" name="search_query" placeholder="Search By Title" class="form-control" required>
+                <select name="search_type" style="margin-left:10px;" class="search-select" >
+                    <option value="job_title" selected>Title</option>
+                </select>
+                <div style="margin-left:10px;">
+                    <button type="submit" class="btn btn-primary" >Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    <table class="table table-bordered table-hover" style="background-color: rgba(52, 192, 235, 0.2);">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Options</th>
+                <th scope="col">No.</th>
+                <th scope="col">Title</th>
+                <th scope="col">Expected Employees</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for job in jobs_list %}
+            <tr>
+                <td>
+                    {% if user.is_superuser %}
+                        <a href="{% url 'job_update' pk=job.pk %}" class="btn btn-success"><img src="{% static 'edit_ico.png' %}" 
+                            alt="Edit" width="20" height="20"></a>
+                        <a href="{% url 'job_delete' pk=job.pk %}" class="btn btn-danger"><img src="{% static 'del_ico.png' %}" 
+                        alt="Edit" width="20" height="20"></a>
+                    {% endif %}
+    
+                    <a href="{% url 'job_detail' pk=job.pk %}" class="btn btn-info"><img src="{% static 'info_ico.png' %}" 
+                    alt="Details" width="20" height="20"></a>              
+                </td>
+                
+                <td>{{ forloop.counter }}</td>
+                <td>{{ job.job_title }}</td>
+                <td>{{ job.expected_employees }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div>
+        <p><b>Options:</b></p>
+        {% if user.is_superuser %}
+        <p>
+            <button type="button" class="btn btn-info"><img src="{% static 'info_ico.png' %}" alt="Details" width="20" height="20"></button>&nbsp;&nbsp;Check details 
+            &nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-danger"><img src="{% static 'del_ico.png' %}" alt="Delete" width="20" height="20"></button>&nbsp;&nbsp;Delete 
+            &nbsp;&nbsp;&nbsp;
+        </p>
+        {% endif %}
+        <p>
+            <button type="button" class="btn btn-success"><img src="{% static 'edit_ico.png' %}" alt="Edit" width="20" height="20"></button>&nbsp;&nbsp;Edit
+        </p>
+        <br>
+    </div>
+</div>
+
+{% endblock body_block %}

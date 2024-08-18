@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% load bootstrap4 %}
+{% load static %}
+
+{% block head_block %}
+{{ form.media }} {% endblock %}
+
+{% block body_block %}
+
+<div class="container">
+    <h4 style="color:red;"> !Warning! You're deleting this Job.<br>This may result loss data.</h4>
+    <br>
+    <div>
+        <table class="table table-bordered table-hover" style="background-color: rgba(100, 0, 0, 0.2);">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Expected Employees</th>
+                </tr>
+            </thead>
+            <tbody>
+                <td>{{ job.job_title }}</td>
+                <td>{{ job.expected_employees }}</td>
+            </tbody>
+        </table>             
+    </div>
+
+    <h4>Are you sure you want to delete?</h4><br>
+    <form method="POST">
+        {% csrf_token %}
+        <a href="javascript:history.back()" class="btn btn-dark"> Cancel </a>
+        &nbsp;&nbsp;&nbsp;
+        <input type="submit" value="Delete" class="btn btn-danger">
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    </form>
+</div>
+{% endblock %}
