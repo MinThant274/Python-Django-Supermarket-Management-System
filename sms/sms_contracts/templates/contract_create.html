@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% load static %}
+{% block head_block %}
+
+{{ form.media }} {% endblock %}
+{% block body_block %}
+
+<div class="container">
+    <div
+    class="p-5 text-center bg-image"
+    style="
+    background-image: url('https://images.alphacoders.com/752/752588.png');
+    height: 250px;
+    margin-top: 2px;">
+
+    <div class="mask" style="background-color: rgba(0, 0, 0, .5);">
+        <div class="d-flex justify-content-center align-items-center h-150">
+        <div class="text-white">
+            <h1 class="mb-3">Create Contract</h1>
+            <p class="mb-3">You are adding a new employee</p>
+            <a class="btn btn-outline-light btn-lg" href="javascript:history.back()" role="button">Back to List</a>
+        </div>
+        </div>
+    </div>
+    </div>
+    <br><br>
+    <form method="POST" action="{% url 'contract_create' %}" enctype="multipart/form-data">
+        
+        {% csrf_token %}
+        {% bootstrap_form form %}
+
+        <div class="text-center">
+            <br><br>
+            <input type="submit" value="Create" class="btn-action btn btn-primary btn-large">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="javascript:history.back()" class="btn btn-dark"> Cancel </a>
+        </div>
+        <br>
+    </form>
+    <br><br>
+</div>
+
+{% endblock %}

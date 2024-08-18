@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% load bootstrap4 %}
+{% load static %}
+
+{% block head_block %}
+{{ form.media }} {% endblock %}
+
+{% block body_block %}
+
+<div>
+    <div>
+        <div>
+            <div
+                class="p-5 text-center bg-image"
+                style="
+                background-image: url('https://images.alphacoders.com/752/752588.png');
+                height: 125px;">
+                <div class="mask" style="background-color: rgba(0, 0, 0, .5);">
+                    <div class="d-flex justify-content-left h-10">
+                        <div class="text-white">
+                            <h3 class="mb-3">Contracts Details</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <table class="table table-bordered table-hover" style="background-color: rgba(52, 192, 235, 0.2);">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Start Date</th>
+                    <th scope="col">End Date</th>
+                    <th scope="col">Position</th>
+                    <th scope="col">Salary</th>
+                    <th scope="col">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <td>{{ contract.contract_name }}</td>
+                <td>{{ contract.start_date }}</td>
+                <td>{{ contract.end_date }}</td>
+                <td>{{ contract.job_id.all|join:", " }}</td>
+                <td>{{ contract.salary }}</td>
+                <td>{{ contract.description }}</td>
+            </tbody>
+        </table>
+        </div>
+        <br>
+        <a href="javascript:history.back()" class="btn btn-dark"> Return </a>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br>
+    </div> 
+</div>
+
+{% endblock %}

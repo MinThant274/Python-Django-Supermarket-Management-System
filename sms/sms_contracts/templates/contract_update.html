@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% load bootstrap4 %}
+{% load static %}
+
+{% block head_block %} 
+{{ form.media }} {% endblock %}
+{% block body_block %}
+
+<div class="container">
+    <div
+    class="p-5 text-center bg-image"
+    style="
+      background-image: url('https://images.alphacoders.com/752/752588.png');
+      height: 250px;
+      margin-top: 2px;">
+        <div class="mask" style="background-color: rgba(0, 0, 0, .5);">
+            <div class="d-flex justify-content-center align-items-center h-100">
+                <div class="text-white">
+                    <h1 class="mb-3">Edit</h1>
+                    <p class="mb-3">You are editing a contract.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <form method="POST" action="{% url 'contract_update' pk=contract.pk %}" enctype="multipart/formdata">
+        
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <div class="text-center">
+            <br><br>
+            <input type="submit" value="Update" class="btn-action btn btn-primary btn-large">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="javascript:history.back()"  class="btn btn-dark"> Cancel </a>
+        </div>
+    </form>
+    <br><br>
+</div>
+
+{% endblock %}
